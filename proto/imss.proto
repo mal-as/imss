@@ -1,0 +1,30 @@
+syntax = "proto3";
+package imss_v1;
+
+option go_package = "github.com/mal-as/imss/proto";
+
+message Respone {
+    bytes Value = 1;
+}
+
+message GetReq {
+    string Key = 1;
+}
+
+message StoreReq {
+    string Key = 1;
+    bytes Value = 2;
+}
+
+message StoreStatus {
+    enum Code {
+        Ok = 0;
+        Bad = 1;
+    }
+    Code Status = 1;
+}
+
+service Storage {
+    rpc Get(GetReq) returns (Respone) {}
+    rpc Store(StoreReq) returns (StoreStatus) {}
+}
